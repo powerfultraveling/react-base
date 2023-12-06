@@ -1,6 +1,5 @@
 import { AnimalType } from "./libs/enum";
 import { useState } from "react";
-import "./App.css";
 import AnimalFigure from "./components/AnimalFigure";
 
 function App() {
@@ -17,8 +16,11 @@ function App() {
   return (
     <>
       {animals}
+      <div className="head bg-black w-10 h-10"></div>
       <div>
-        <button onClick={addAnimal}>CLick</button>
+        <button onClick={addAnimal} className="mb-20 pt-10">
+          CLick
+        </button>
       </div>
       {animals.map((animal) => (
         <AnimalFigure type={animal} />
