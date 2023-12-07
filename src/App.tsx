@@ -1,31 +1,30 @@
-import { AnimalType } from "./libs/enum";
-import { useState } from "react";
-import AnimalFigure from "./components/AnimalFigure";
+import { useState, useMemo } from "react";
+
+import SearchForm from "./components/SearchImage/SearchForm";
+import ImageList from "./components/SearchImage/ImageList";
+
+import fetchImage from "./libs/support/fetchImage";
 
 function App() {
-  const [animals, setAnimals] = useState([]);
-  const animalTypes = [AnimalType.CAT, AnimalType.COW, AnimalType.BIRD];
+  const [images, setImages] = useState([]);
+  const normalizedImages = useMemo(() => {
+    return images.map(({ id, urls }) => ({ id, url: urls.small }));
+  }, [images]);
 
-  function addAnimal() {
-    const randomAnimal =
-      animalTypes[Math.floor(Math.random() * animalTypes.length)];
+  async function searchImage(term: string) {
+    const images = await fetchImage(term);
 
-    setAnimals([...animals, randomAnimal]);
+    console.log("image", images.results);
+
+    setImages(images.results);
   }
-
   return (
-    <>
-      {animals}
-      <div className="head bg-black w-10 h-10"></div>
-      <div>
-        <button onClick={addAnimal} className="mb-20 pt-10">
-          CLick
-        </button>
+    <div className="py-10">
+      <div className="flex justify-center mb-10">
+        <SearchForm handleSubmit={searchImage} />
       </div>
-      {animals.map((animal) => (
-        <AnimalFigure type={animal} />
-      ))}
-    </>
+      <ImageList images={normalizedImages} />
+    </div>
   );
 }
 

@@ -2,8 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.head {
-  background-color: black;
-  width: 100px;
-  height: 100px;
+
+.button {
+  @apply border border-black cursor-pointer p-2 hover:bg-black hover:text-white;
 }
