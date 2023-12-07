@@ -2,28 +2,28 @@ import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 
 interface Props {
-  handleSubmit: (term: string) => void;
+  handleSubmit: (inputValue: string) => void;
 }
 
 function SearchForm({ handleSubmit }: Props) {
-  const [term, setTerm] = useState("");
+  const [inputValue, setInputValue] = useState("");
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
 
-    handleSubmit(term);
+    handleSubmit(inputValue);
   }
 
   function handleInput(e: ChangeEvent) {
     const value = (e.target as HTMLInputElement).value;
 
-    setTerm(value);
+    setInputValue(value);
   }
 
   return (
     <form onSubmit={onSubmit} className="flex items-center space-x-2">
       <input
-        value={term}
+        value={inputValue}
         onChange={handleInput}
         className="px-1 py-2 border border-black rounded-md"
       />
