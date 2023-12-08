@@ -6,3 +6,7 @@
 .button {
   @apply border border-black cursor-pointer p-2 hover:bg-black hover:text-white;
 }
+
+.small-btn{
+  @apply border border-black rounded-full w-5 h-5 flex items-center justify-center hover:bg-slate-400;
+}
