@@ -26,12 +26,33 @@ function App() {
     setBooks(updatedBooks);
   }
 
+  function editBook(id: string, title: string) {
+    const updatedBooks = books.map((book) => {
+      if (book.id === id) {
+        return {
+          ...book,
+          title,
+        };
+      }
+
+      return book;
+    });
+
+    setBooks(updatedBooks);
+  }
+
+  function removeBook(id: string) {
+    const updatedBooks = books.filter((book) => book.id !== id);
+
+    setBooks(updatedBooks);
+  }
+
   return (
     <div className="px-10 py-10">
       <div className="flex justify-center mb-10">
         <SearchForm handleSubmit={addBook} />
       </div>
-      <BookList books={books} />
+      <BookList books={books} onEdit={editBook} onRemove={removeBook} />
     </div>
   );
 }
