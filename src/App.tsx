@@ -1,37 +1,44 @@
-import { v4 as uuid } from "uuid";
-import { useState } from "react";
+// import { v4 as uuid } from "uuid";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 import type { Book } from "./libs/types";
 
 import SearchForm from "./components/SearchImage/SearchForm";
 import BookList from "./components/Book/BookList";
 
+const END_POINT = "http://localhost:3001/books";
+
 function App() {
   const [books, setBooks] = useState<Book[]>([]);
 
-  function buildBook(title: string) {
-    const id = uuid();
+  async function fetchAllBooks() {
+    const response = await axios.get(END_POINT);
 
-    return {
-      id,
-      title,
-    };
+    setBooks(response.data);
   }
 
-  function addBook(title: string) {
-    const book = buildBook(title);
+  useEffect(() => {
+    fetchAllBooks();
+  }, []);
 
-    const updatedBooks = [...books, book];
+  async function addBook(title: string) {
+    const response = await axios.post(END_POINT, { title });
+    const updatedBook = response.data;
+
+    const updatedBooks = [...books, updatedBook];
 
     setBooks(updatedBooks);
   }
 
-  function editBook(id: string, title: string) {
+  async function editBook(id: string, title: string) {
+    const response = await axios.put(`${END_POINT}/${id}`, { title });
+
     const updatedBooks = books.map((book) => {
       if (book.id === id) {
         return {
           ...book,
-          title,
+          ...response.data,
         };
       }
 
@@ -41,7 +48,9 @@ function App() {
     setBooks(updatedBooks);
   }
 
-  function removeBook(id: string) {
+  async function removeBook(id: string) {
+    await axios.delete(`${END_POINT}/${id}`);
+
     const updatedBooks = books.filter((book) => book.id !== id);
 
     setBooks(updatedBooks);
