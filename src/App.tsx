@@ -41,12 +41,18 @@ function App() {
     setBooks(updatedBooks);
   }
 
+  function removeBook(id: string) {
+    const updatedBooks = books.filter((book) => book.id !== id);
+
+    setBooks(updatedBooks);
+  }
+
   return (
     <div className="px-10 py-10">
       <div className="flex justify-center mb-10">
         <SearchForm handleSubmit={addBook} />
       </div>
-      <BookList books={books} onEdit={editBook} />
+      <BookList books={books} onEdit={editBook} onRemove={removeBook} />
     </div>
   );
 }

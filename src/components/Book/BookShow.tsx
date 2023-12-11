@@ -7,9 +7,10 @@ import SearchForm from "../SearchImage/SearchForm";
 interface Props {
   book: Book;
   handleEdit: (id: string, title: string) => void;
+  handleRemove: (id: string) => void;
 }
 
-function BookShow({ book, handleEdit }: Props) {
+function BookShow({ book, handleEdit, handleRemove }: Props) {
   const [isEditMode, setIsEditMode] = useState(false);
 
   function onEdit(title: string) {
@@ -27,15 +28,15 @@ function BookShow({ book, handleEdit }: Props) {
   return (
     <div className="w-full px-4 py-5 border border-black rounded-2xl flex items-center justify-between">
       {booTitle}
-      {!isEditMode ? (
+      {!isEditMode && (
         <div className="flex items-center space-x-2">
           <button className="small-btn" onClick={() => setIsEditMode(true)}>
             E
           </button>
-          <button className="small-btn">D</button>
+          <button className="small-btn" onClick={() => handleRemove(book.id)}>
+            D
+          </button>
         </div>
-      ) : (
-        ""
       )}
     </div>
   );
