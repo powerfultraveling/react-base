@@ -1,11 +1,11 @@
-import type { Book } from "../../libs/types";
+import type { Book } from '../../libs/types'
 
-import BookShow from "./BookShow";
+import BookShow from './BookShow'
 
 interface Props {
-  books: Book[];
-  onEdit: (id: string, title: string) => void;
-  onRemove: (id: string) => void;
+  books: Book[]
+  onEdit: (id: string, title: string) => void
+  onRemove: (id: string) => void
 }
 
 function BookList({ books, onEdit, onRemove }: Props) {
@@ -15,7 +15,7 @@ function BookList({ books, onEdit, onRemove }: Props) {
         <BookShow book={book} handleEdit={onEdit} handleRemove={onRemove} />
       ))}
     </div>
-  );
+  )
 }
 
-export default BookList;
+export default BookList

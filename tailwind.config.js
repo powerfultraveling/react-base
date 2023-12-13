@@ -1,10 +1,12 @@
+import { spacing, width, height } from './tailwind/config'
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./index.html",
-    "./src/**/*.{js,jsx,ts,tsx}",
+    './index.html',
+    './src/**/*.{js,jsx,ts,tsx}',
     './src/assets/css/**/*.css',
-    './components/**/*.{js,jsx,ts,tsx}',
+    './components/**/*.{js,jsx,ts,tsx}'
   ],
   theme: {
     extend: {
@@ -82,10 +84,11 @@ export default {
         '7xl': ['2.25rem', '125%'],
         '8xl': ['2.75rem', '125%'],
         '9xl': ['3rem', '125%']
-      },
-    }
-
+      }
+    },
+    width,
+    height,
+    spacing
   },
-  plugins: [],
+  plugins: []
 }
-
