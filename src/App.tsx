@@ -1,4 +1,4 @@
-// import { v4 as uuid } from "uuid";
+import AccordionPage from './pages/AccordionsPage'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
@@ -58,6 +58,7 @@ function App() {
 
   return (
     <div className="px-10 py-10">
+      <AccordionPage />
       <div className="flex justify-center mb-10">
         <SearchForm handleSubmit={addBook} />
       </div>
